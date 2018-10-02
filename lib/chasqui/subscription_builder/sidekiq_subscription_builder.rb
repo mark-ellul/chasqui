@@ -3,7 +3,11 @@ module Chasqui
     protected
 
     def get_queue_name(worker)
-      worker.sidekiq_options['queue']
+      if worker.sidekiq_options
+       return  worker.sidekiq_options['queue']
+      else
+        return "pubsub"
+      end
     end
 
     def set_queue_name(worker, queue)
